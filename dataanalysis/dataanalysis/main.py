@@ -3,15 +3,23 @@
 from pathlib import Path
 
 import typer
+import pytest
+
+from rich.console import Console
 
 from dataanalysis import summarize
 from dataanalysis import transform
 
-from rich.console import Console
-
 cli = typer.Typer()
 
 console = Console()
+
+
+@cli.command()
+def test():
+    """Run the test suite."""
+    print("Run the test suite")
+    pytest.main(["tests"])
 
 
 @cli.command()
