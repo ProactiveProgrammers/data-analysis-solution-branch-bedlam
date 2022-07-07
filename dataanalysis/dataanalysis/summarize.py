@@ -3,6 +3,7 @@
 from typing import List
 
 from dataanalysis import fiasco
+from dataanalysis import bedlam
 
 
 @fiasco.createfiasco
@@ -15,15 +16,17 @@ def compute_mean(numbers: List[float]) -> float:
     # as long as the computation will not be an
     # undefined division by zero, compute the mean
     # https://stackoverflow.com/questions/58400652/average-returning-a-value-even-when-list-is-empty
-    if number_length != 0:
-        mean = number_sum / number_length
-    # if the list was empty, then return a mean that is "not a number"
-    # https://stackoverflow.com/questions/944700/how-can-i-check-for-nan-values
-    else:
-        mean = float("nan")
+    with bedlam.Bedlam(1):
+        if number_length != 0:
+            mean = number_sum / number_length
+        # if the list was empty, then return a mean that is "not a number"
+        # https://stackoverflow.com/questions/944700/how-can-i-check-for-nan-values
+        else:
+            mean = float("nan")
     return mean
 
 
+@fiasco.createfiasco
 def compute_median(numbers: List[float]) -> float:
     """Compute the median of a list of numbers."""
     count = len(numbers)
@@ -57,6 +60,7 @@ def compute_median(numbers: List[float]) -> float:
     return median
 
 
+@fiasco.createfiasco
 def compute_difference(numbers: List[float]) -> List[float]:
     """Compute difference for each value from the calculated mean."""
     # compute the mean
@@ -68,6 +72,7 @@ def compute_difference(numbers: List[float]) -> List[float]:
     return differences
 
 
+@fiasco.createfiasco
 def compute_variance(numbers: List[float]) -> float:
     """Compute the variance of a list of numbers."""
     # compute the difference from the mean
@@ -82,6 +87,7 @@ def compute_variance(numbers: List[float]) -> float:
     return variance
 
 
+@fiasco.createfiasco
 def compute_standard_deviation(numbers: List[float]) -> float:
     """Compute the standard deviation of a list of numbers."""
     # call the function to calculate the variance
