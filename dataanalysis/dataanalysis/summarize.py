@@ -2,7 +2,10 @@
 
 from typing import List
 
+from dataanalysis import fiasco
 
+
+@fiasco.createfiasco
 def compute_mean(numbers: List[float]) -> float:
     """Compute the mean of a list of numbers."""
     # sum the list of the numbers
