@@ -1,4 +1,4 @@
-"""Create a fiasco in the functions and branches of a program."""
+"""Create a fiasco in the functions of a program."""
 
 from functools import wraps
 
