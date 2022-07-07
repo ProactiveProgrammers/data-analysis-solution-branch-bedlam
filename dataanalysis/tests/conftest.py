@@ -2,6 +2,7 @@
 
 import pytest
 
+from dataanalysis import bedlam
 from dataanalysis import fiasco
 
 
@@ -11,4 +12,5 @@ def session_setup_teardown():
     print("Before test suite execution")
     yield
     fiasco.save_tracker()
+    bedlam.save_tracker()
     print("After test suite execution")
