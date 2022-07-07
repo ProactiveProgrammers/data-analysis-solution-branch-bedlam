@@ -23,7 +23,7 @@ def test():
 
 
 @cli.command()
-def main(
+def analyze(
     data_file: Path = typer.Option(...),
 ):
     """Summarize the data values stored in a file."""
