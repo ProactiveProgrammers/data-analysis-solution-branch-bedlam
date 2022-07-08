@@ -63,11 +63,18 @@ def createfiasco(function):
             f"function {function_name} found in module {function_module} has id {function_id}"
         )
         print(f"reverse engineered function {function_details_from_id}")
+        # the current function is supposed to be fiascoified, which means
+        # that it should not be executed; return None instead of running
+        # the function and returning its actual return value
         if fiascoified_function_id == function_id:
             print(
                 f"WILL NOT RUN THIS FUNCTION! + {convert_from_number(fiascoified_function_id)}"
             )
             return None
+        # the current function is not supposed to be fiascoified, which means
+        # that it should be run normally and then its return value returned;
+        # from the perspective of the function and its program, there should be
+        # no evidence that this decorator was actually executed
         else:
             result = function(*args, **kwargs)
             return result
