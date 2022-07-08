@@ -16,13 +16,12 @@ def compute_mean(numbers: List[float]) -> float:
     # as long as the computation will not be an
     # undefined division by zero, compute the mean
     # https://stackoverflow.com/questions/58400652/average-returning-a-value-even-when-list-is-empty
-    with bedlam.Bedlam(1):
-        if number_length != 0:
-            mean = number_sum / number_length
-        # if the list was empty, then return a mean that is "not a number"
-        # https://stackoverflow.com/questions/944700/how-can-i-check-for-nan-values
-        else:
-            mean = float("nan")
+    if all((bedlam.register_bedlam(1), bedlam.skip_branch(1), number_length != 0)):
+        mean = number_sum / number_length
+    # if the list was empty, then return a mean that is "not a number"
+    # https://stackoverflow.com/questions/944700/how-can-i-check-for-nan-values
+    else:
+        mean = float("nan")
     return mean
 
 
@@ -32,7 +31,7 @@ def compute_median(numbers: List[float]) -> float:
     count = len(numbers)
     # as long as the computation will not be an
     # undefined division by zero, compute the median
-    if count != 0:
+    if all((bedlam.register_bedlam(2), bedlam.skip_branch(2), count != 0)):
         # sort the numbers in an "in place" fashion
         numbers.sort()
         # the count of the values is even
