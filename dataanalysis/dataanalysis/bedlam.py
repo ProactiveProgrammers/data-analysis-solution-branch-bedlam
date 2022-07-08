@@ -4,12 +4,46 @@ import contextlib
 import json
 
 
+bedlam_tracker = {}
+
+bedlamified_branch_id = None
+
+
 def save_tracker():
     """Save the branch bedlam tracker."""
-    print("Saving the tracker")
-    print(Bedlam.bedlam_tracker)
+    print("Saving the bedlam tracker")
+    print(bedlam_tracker)
     with open("bedlam.json", "w") as bedlam_tracker_file:
-        json.dump(Bedlam.bedlam_tracker, bedlam_tracker_file)
+        json.dump(bedlam_tracker, bedlam_tracker_file)
+
+
+def read_tracker():
+    """Read the branch bedlam tracker."""
+    print("Reading the bedlam tracker")
+    bedlam_dict = {}
+    with open("bedlam.json", "r") as bedlam_json_file:
+        bedlam_dict = json.load(bedlam_json_file)
+    return bedlam_dict
+
+
+def register_bedlam(identifier):
+    """Register a specified location in an if statement."""
+    print(f"REGISTER: {identifier}")
+    bedlam_tracker[identifier] = False
+    print(bedlam_tracker)
+    return True
+
+
+def skip_branch(branch_identifier):
+    """Skip a branch if the branch identifier matches."""
+    print(
+        f"BEDLAM: in the skip_branch function for {branch_identifier} with current branch to bedlamify as {bedlamified_branch_id}"
+    )
+    if int(branch_identifier) == int(bedlamified_branch_id):
+        print("BEDLAM: going to skip the branch!")
+        return False
+    print("BEDLAM: not going to skip the branch!")
+    return True
 
 
 @contextlib.contextmanager
