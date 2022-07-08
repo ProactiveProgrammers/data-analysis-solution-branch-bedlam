@@ -17,7 +17,7 @@ console = Console()
 
 
 @cli.command()
-def test():
+def fiasco():
     """Run the test suite."""
     print("Run the test suite")
     commander.cause_testing_fiasco()
