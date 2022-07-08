@@ -7,6 +7,7 @@ import pytest
 
 from rich.console import Console
 
+from dataanalysis import commander
 from dataanalysis import summarize
 from dataanalysis import transform
 
@@ -19,7 +20,7 @@ console = Console()
 def test():
     """Run the test suite."""
     print("Run the test suite")
-    pytest.main(["tests"])
+    commander.cause_testing_fiasco()
 
 
 @cli.command()
