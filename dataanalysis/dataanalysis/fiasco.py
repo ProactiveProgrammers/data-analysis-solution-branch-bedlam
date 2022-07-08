@@ -65,9 +65,11 @@ def createfiasco(function):
         print(f"reverse engineered function {function_details_from_id}")
         if fiascoified_function_id == function_id:
             print(
-                f"WOULD HAVE NOT RUN THIS FUNCTION! + {convert_from_number(fiascoified_function_id)}"
+                f"WILL NOT RUN THIS FUNCTION! + {convert_from_number(fiascoified_function_id)}"
             )
-        result = function(*args, **kwargs)
-        return result
+            return None
+        else:
+            result = function(*args, **kwargs)
+            return result
 
     return wrap
