@@ -18,9 +18,16 @@ console = Console()
 
 @cli.command()
 def fiasco():
-    """Run the test suite."""
-    print("Run the test suite")
+    """Run the test suite with function fiasco."""
+    print("Run the test suite with function fiasco.")
     commander.cause_testing_fiasco()
+
+
+@cli.command()
+def bedlam():
+    """Run the test suite with branch bedlam."""
+    print("Run the test suite with branch bedlam.")
+    commander.cause_branch_bedlam()
 
 
 @cli.command()
