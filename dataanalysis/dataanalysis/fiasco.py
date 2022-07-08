@@ -11,6 +11,8 @@ SINGLE_BLANK_SPACE = " "
 
 fiasco_tracker = {}
 
+fiascoified_function_id = None
+
 
 def convert_to_number(textual):
     """Convert from a textual representation to a numerical value."""
@@ -29,6 +31,15 @@ def save_tracker():
         json.dump(fiasco_tracker, fiasco_json_file)
 
 
+def read_tracker():
+    """Read the function fiasco tracker."""
+    print("Reading the tracker")
+    fiasco_dict = {}
+    with open("fiasco.json", "r") as fiasco_json_file:
+        fiasco_dict = json.load(fiasco_json_file)
+    return fiasco_dict
+
+
 def createfiasco(function):
     """Define a fiasco function that can observe and control function execution."""
 
@@ -40,7 +51,9 @@ def createfiasco(function):
         function_module = inspect.getmodule(function)
         # convert the name and module of the function into an integer identifier
         # note that it may not be guaranteed that this number is unique
-        function_id = convert_to_number(function_name + SINGLE_BLANK_SPACE + str(function_module))
+        function_id = convert_to_number(
+            function_name + SINGLE_BLANK_SPACE + str(function_module)
+        )
         function_details_from_id = convert_from_number(function_id)
         # create a key value pair of (function_id, False) to indicate that this
         # specific function has not yet been fiasco-ified (i.e., turned off) during
@@ -50,6 +63,10 @@ def createfiasco(function):
             f"function {function_name} found in module {function_module} has id {function_id}"
         )
         print(f"reverse engineered function {function_details_from_id}")
+        if fiascoified_function_id == function_id:
+            print(
+                f"WOULD HAVE NOT RUN THIS FUNCTION! + {convert_from_number(fiascoified_function_id)}"
+            )
         result = function(*args, **kwargs)
         return result
 
